@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "Mahala",
+    "slug": "mahala",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "android": {
+      "package": "com.mahala.app"
+    },
+    "ios": {
+      "bundleIdentifier": "com.mahala.app"
+    },
+    "plugins": [
+      "expo-screen-orientation",
+      "expo-asset"
+    ]
+  }
+}
