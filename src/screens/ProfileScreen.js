@@ -3,9 +3,9 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { colors } from "../constants/theme";
 
 const ACTIVITY_ITEMS = [
-  { label: "My Mahale", view: "MY_POSTS" },
-  { label: "My Replies", view: "MY_REPLIES" },
-  { label: "My Votes", view: "MY_VOTES" }
+  { label: "Moje Mahale", view: "MY_POSTS" },
+  { label: "Moji odgovori", view: "MY_REPLIES" },
+  { label: "Moji glasovi", view: "MY_VOTES" }
 ];
 
 export default function ProfileScreen({ user, isGuest, isPremium, credits, furka, onOpenPurchase, onUpgrade, onOpenActivity, onOpenSettings, onLogout }) {
@@ -16,7 +16,7 @@ export default function ProfileScreen({ user, isGuest, isPremium, credits, furka
           <Text style={styles.avatarText}>{isGuest ? "G" : user.firstName?.slice(0, 1)}</Text>
         </View>
         <View style={styles.heroCopy}>
-          <Text style={styles.name}>{isGuest ? "Guest User" : `${user.firstName} ${user.lastName}`}</Text>
+          <Text style={styles.name}>{isGuest ? "Gost korisnik" : `${user.firstName} ${user.lastName}`}</Text>
           <Text style={styles.handle}>@{isGuest ? "gost" : user.username}</Text>
           {!isGuest ? <Text style={styles.furka}>Moja Furka {furka}</Text> : null}
         </View>
@@ -25,11 +25,11 @@ export default function ProfileScreen({ user, isGuest, isPremium, credits, furka
       <View style={styles.grid}>
         <View style={styles.gridItem}>
           <Text style={styles.gridValue}>{credits.boosts}</Text>
-          <Text style={styles.gridLabel}>Boosts</Text>
+          <Text style={styles.gridLabel}>Boostovi</Text>
         </View>
         <View style={styles.gridItem}>
           <Text style={styles.gridValue}>{credits.colors}</Text>
-          <Text style={styles.gridLabel}>Colors</Text>
+          <Text style={styles.gridLabel}>Boje</Text>
         </View>
         <View style={styles.gridItem}>
           <Text style={styles.gridValue}>{isPremium ? "ON" : "OFF"}</Text>
@@ -37,7 +37,7 @@ export default function ProfileScreen({ user, isGuest, isPremium, credits, furka
         </View>
       </View>
 
-      <Text style={styles.sectionLabel}>Activity</Text>
+      <Text style={styles.sectionLabel}>Aktivnost</Text>
       {ACTIVITY_ITEMS.map((item) => (
         <Pressable key={item.view} onPress={() => onOpenActivity(item.view)} style={styles.menuRow}>
           <Text style={styles.menuText}>{item.label}</Text>
@@ -45,31 +45,31 @@ export default function ProfileScreen({ user, isGuest, isPremium, credits, furka
         </Pressable>
       ))}
 
-      <Text style={styles.sectionLabel}>Rewards</Text>
+      <Text style={styles.sectionLabel}>Nagrade</Text>
       <View style={styles.rewardRow}>
         <Pressable onPress={() => onOpenPurchase("boosts")} style={[styles.rewardCard, { backgroundColor: colors.accent }]}>
-          <Text style={styles.rewardTitle}>Boosts</Text>
-          <Text style={styles.rewardCopy}>Push your post higher.</Text>
+          <Text style={styles.rewardTitle}>Boostovi</Text>
+          <Text style={styles.rewardCopy}>Podigni svoju objavu vise.</Text>
         </Pressable>
         <Pressable onPress={() => onOpenPurchase("colors")} style={[styles.rewardCard, { backgroundColor: colors.success }]}>
-          <Text style={styles.rewardTitle}>Colors</Text>
-          <Text style={styles.rewardCopy}>Unlock louder cards.</Text>
+          <Text style={styles.rewardTitle}>Boje</Text>
+          <Text style={styles.rewardCopy}>Otkljucaj jace kartice.</Text>
         </Pressable>
       </View>
 
       {!isPremium ? (
         <Pressable onPress={onUpgrade} style={styles.upgrade}>
           <Text style={styles.upgradeTitle}>Mahala Plus</Text>
-          <Text style={styles.upgradeCopy}>Premium channels, image freedom, stronger rewards.</Text>
+          <Text style={styles.upgradeCopy}>Premium kanali, sloboda za slike i jace nagrade.</Text>
         </Pressable>
       ) : null}
 
       <Pressable onPress={onOpenSettings} style={styles.settings}>
-        <Text style={styles.settingsText}>Open settings</Text>
+        <Text style={styles.settingsText}>Otvori postavke</Text>
       </Pressable>
 
       <Pressable onPress={onLogout} style={styles.logout}>
-        <Text style={styles.logoutText}>Log out</Text>
+        <Text style={styles.logoutText}>Odjavi se</Text>
       </Pressable>
     </ScrollView>
   );

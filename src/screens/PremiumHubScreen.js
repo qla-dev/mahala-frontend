@@ -2,15 +2,15 @@ import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { colors } from "../constants/theme";
 
-const FEATURES = ["Premium channels", "Image posting freedom", "Reward unlocks", "More color packs"];
+const FEATURES = ["Premium kanali", "Sloboda za objave sa slikom", "Otkljucane nagrade", "Vise paketa boja"];
 
 export default function PremiumHubScreen({ onPurchase }) {
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <View style={styles.hero}>
         <Text style={styles.kicker}>Mahala Plus</Text>
-        <Text style={styles.title}>Go louder in your local scene.</Text>
-        <Text style={styles.copy}>Unlock premium channels, deeper identity perks, and stronger post tools without changing the core Mahala feel.</Text>
+        <Text style={styles.title}>Budi glasniji u svojoj lokalnoj sceni.</Text>
+        <Text style={styles.copy}>Otkljucaj premium kanale, jaci identitet i bolje alate za objave bez mijenjanja Mahala osjecaja.</Text>
       </View>
 
       {FEATURES.map((feature) => (
@@ -20,7 +20,7 @@ export default function PremiumHubScreen({ onPurchase }) {
       ))}
 
       <Pressable onPress={onPurchase} style={styles.primary}>
-        <Text style={styles.primaryText}>Activate Mahala Plus</Text>
+        <Text style={styles.primaryText}>Aktiviraj Mahala Plus</Text>
       </Pressable>
     </ScrollView>
   );

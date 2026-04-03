@@ -3,17 +3,17 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import PostCard from "../components/PostCard";
 import { colors, shadows } from "../constants/theme";
 
-const TABS = ["Newest", "Popular", "Near you"];
+const TABS = ["Najnovije", "Popularno", "Blizu tebe"];
 
 export default function FeedScreen({ posts, currentLocation, votedPosts, onVote, onOpenPost, onOpenCreatePost, onUpgrade, onReport, onHide, refreshControl }) {
-  const [tab, setTab] = useState("Newest");
+  const [tab, setTab] = useState("Najnovije");
 
   const filteredPosts = useMemo(() => {
-    if (tab === "Popular") {
+    if (tab === "Popularno") {
       return [...posts].sort((a, b) => b.score - a.score);
     }
 
-    if (tab === "Near you") {
+    if (tab === "Blizu tebe") {
       return posts.filter((post) => post.location === currentLocation);
     }
 
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    bottom: 88,
+    bottom: 72,
     alignSelf: "center",
     width: 68,
     height: 68,

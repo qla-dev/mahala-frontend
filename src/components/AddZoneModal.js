@@ -10,25 +10,25 @@ export default function AddZoneModal({ visible, onClose }) {
     <Modal animationType="fade" transparent visible={visible} onRequestClose={onClose}>
       <View style={styles.wrap}>
         <View style={styles.card}>
-          <Text style={styles.title}>Add zone</Text>
+          <Text style={styles.title}>Dodaj zonu</Text>
           {!located ? (
             <>
-              <Text style={styles.copy}>Find your current position first, then send a new Mahala zone for approval.</Text>
+              <Text style={styles.copy}>Prvo pronadi svoju trenutnu lokaciju, pa posalji novu Mahala zonu na odobrenje.</Text>
               <Pressable onPress={() => setLocated(true)} style={styles.primary}>
-                <Text style={styles.primaryText}>Find me</Text>
+                <Text style={styles.primaryText}>Pronadi me</Text>
               </Pressable>
             </>
           ) : (
             <>
-              <Text style={styles.copy}>Location found. Name the new zone and send it for approval.</Text>
-              <TextInput placeholder="Zone name" placeholderTextColor={colors.subdued} value={zoneName} onChangeText={setZoneName} style={styles.input} />
+              <Text style={styles.copy}>Lokacija je pronadena. Imenuj novu zonu i posalji je na odobrenje.</Text>
+              <TextInput placeholder="Naziv zone" placeholderTextColor={colors.subdued} value={zoneName} onChangeText={setZoneName} style={styles.input} />
               <Pressable onPress={() => { setZoneName(""); setLocated(false); onClose(); }} style={styles.primary}>
-                <Text style={styles.primaryText}>Send request</Text>
+                <Text style={styles.primaryText}>Posalji zahtjev</Text>
               </Pressable>
             </>
           )}
           <Pressable onPress={() => { setZoneName(""); setLocated(false); onClose(); }} style={styles.secondary}>
-            <Text style={styles.secondaryText}>Close</Text>
+            <Text style={styles.secondaryText}>Zatvori</Text>
           </Pressable>
         </View>
       </View>

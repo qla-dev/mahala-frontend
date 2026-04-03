@@ -1,23 +1,24 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../constants/theme";
 
 const TITLES = {
   FEED: "Mahala",
-  SEARCH: "Channels",
-  MAP: "Map",
-  NOTIFICATIONS: "Alerts",
-  PROFILE: "Profile",
-  CHANNEL_DETAIL: "Channel",
+  SEARCH: "Kanali",
+  MAP: "Mapa",
+  NOTIFICATIONS: "Obavijesti",
+  PROFILE: "Profil",
+  CHANNEL_DETAIL: "Kanal",
   POST_DETAIL: "Mahala",
   PREMIUM_HUB: "Mahala Plus",
-  SETTINGS: "Settings",
-  CHANGE_PASSWORD: "Change Password",
-  EDIT_NAME: "Edit Name",
-  EDIT_EMAIL: "Edit Email",
-  MY_POSTS: "My Mahale",
-  MY_REPLIES: "My Replies",
-  MY_VOTES: "My Votes"
+  SETTINGS: "Postavke",
+  CHANGE_PASSWORD: "Promjena lozinke",
+  EDIT_NAME: "Uredi ime",
+  EDIT_EMAIL: "Uredi email",
+  MY_POSTS: "Moje Mahale",
+  MY_REPLIES: "Moji odgovori",
+  MY_VOTES: "Moji glasovi"
 };
 
 export default function Header({ view, title, channelName, isPremium, onBack, onOpenSettings, onOpenLocationPicker, onOpenAddZone }) {
@@ -29,11 +30,11 @@ export default function Header({ view, title, channelName, isPremium, onBack, on
       <View style={styles.side}>
         {canGoBack ? (
           <Pressable onPress={onBack} style={styles.iconButton}>
-            <Text style={styles.iconText}>{"<"}</Text>
+            <Ionicons name="chevron-back" size={22} color={colors.text} />
           </Pressable>
         ) : (
           <Pressable onPress={onOpenSettings} style={styles.iconButton}>
-            <Text style={styles.iconText}>[]</Text>
+            <Ionicons name="settings-sharp" size={18} color={colors.text} />
           </Pressable>
         )}
       </View>
@@ -92,11 +93,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: colors.panel
-  },
-  iconText: {
-    color: colors.text,
-    fontSize: 18,
-    fontWeight: "800"
   },
   addButton: {
     width: 38,

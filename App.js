@@ -162,7 +162,7 @@ export default function App() {
 
   const handleVote = async (postId, value) => {
     if (authState.isGuest) {
-      openGuestGate("Voting is available only for registered Mahala members.");
+      openGuestGate("Glasanje je dostupno samo registrovanim Mahala clanovima.");
       return;
     }
 
@@ -257,7 +257,7 @@ export default function App() {
             onOpenPost={handleOpenPost}
             onOpenCreatePost={() => setCreatingPost(true)}
             onUpgrade={() => setCurrentView(VIEW.PREMIUM_HUB)}
-            onReport={() => Alert.alert("Drot is checking", "The report was sent for moderation review.")}
+            onReport={() => Alert.alert("Drot provjerava", "Prijava je poslana na moderatorski pregled.")}
             onHide={handleHidePost}
             refreshControl={<RefreshControl tintColor={colors.text} refreshing={feedRefreshing} onRefresh={handleRefresh} />}
           />
@@ -291,7 +291,7 @@ export default function App() {
             onUpgrade={() => setCurrentView(VIEW.PREMIUM_HUB)}
             onOpenActivity={(view) => {
               if (authState.isGuest) {
-                openGuestGate("This section is available only to registered members.");
+                openGuestGate("Ova sekcija je dostupna samo registrovanim clanovima.");
                 return;
               }
               setCurrentView(view);
@@ -309,7 +309,7 @@ export default function App() {
             onVote={handleVote}
             onOpenPost={handleOpenPost}
             onOpenCreatePost={() => setCreatingPost(true)}
-            onReport={() => Alert.alert("Drot is checking", "The report was sent for moderation review.")}
+            onReport={() => Alert.alert("Drot provjerava", "Prijava je poslana na moderatorski pregled.")}
             onHide={handleHidePost}
           />
         );
@@ -326,24 +326,24 @@ export default function App() {
             isGuest={authState.isGuest}
             onToggleNotifications={setNotificationsEnabled}
             onOpenLocationPicker={() => setLocationPickerOpen(true)}
-            onOpenEditName={() => (authState.isGuest ? openGuestGate("Guest users cannot edit profile details.") : setCurrentView(VIEW.EDIT_NAME))}
-            onOpenEditEmail={() => (authState.isGuest ? openGuestGate("Guest users cannot edit profile details.") : setCurrentView(VIEW.EDIT_EMAIL))}
-            onOpenChangePassword={() => (authState.isGuest ? openGuestGate("Guest users cannot change passwords.") : setCurrentView(VIEW.CHANGE_PASSWORD))}
+            onOpenEditName={() => (authState.isGuest ? openGuestGate("Gost korisnici ne mogu uredjivati profilne podatke.") : setCurrentView(VIEW.EDIT_NAME))}
+            onOpenEditEmail={() => (authState.isGuest ? openGuestGate("Gost korisnici ne mogu uredjivati profilne podatke.") : setCurrentView(VIEW.EDIT_EMAIL))}
+            onOpenChangePassword={() => (authState.isGuest ? openGuestGate("Gost korisnici ne mogu mijenjati lozinku.") : setCurrentView(VIEW.CHANGE_PASSWORD))}
             onLogout={handleLogout}
           />
         );
       case VIEW.CHANGE_PASSWORD:
-        return <ChangePasswordScreen onSubmit={() => Alert.alert("Password updated", "Your password was changed successfully.")} />;
+        return <ChangePasswordScreen onSubmit={() => Alert.alert("Lozinka azurirana", "Tvoja lozinka je uspjesno promijenjena.")} />;
       case VIEW.EDIT_NAME:
         return <EditNameScreen user={authState.user} onSave={(payload) => { updateUser(payload); setCurrentView(VIEW.SETTINGS); }} />;
       case VIEW.EDIT_EMAIL:
         return <EditEmailScreen user={authState.user} onSave={(payload) => { updateUser(payload); setCurrentView(VIEW.SETTINGS); }} />;
       case VIEW.MY_POSTS:
-        return <MyActivityScreen title="My Mahale" posts={visiblePosts.filter((post) => post.author === authState.user.username)} onOpenPost={handleOpenPost} />;
+        return <MyActivityScreen title="Moje Mahale" posts={visiblePosts.filter((post) => post.author === authState.user.username)} onOpenPost={handleOpenPost} />;
       case VIEW.MY_REPLIES:
-        return <MyActivityScreen title="My Replies" posts={visiblePosts.filter((post) => (post.replies || []).some((reply) => reply.author === authState.user.username))} onOpenPost={handleOpenPost} />;
+        return <MyActivityScreen title="Moji odgovori" posts={visiblePosts.filter((post) => (post.replies || []).some((reply) => reply.author === authState.user.username))} onOpenPost={handleOpenPost} />;
       case VIEW.MY_VOTES:
-        return <MyActivityScreen title="My Votes" posts={visiblePosts.filter((post) => (votedPosts[post.id] || 0) !== 0)} onOpenPost={handleOpenPost} />;
+        return <MyActivityScreen title="Moji glasovi" posts={visiblePosts.filter((post) => (votedPosts[post.id] || 0) !== 0)} onOpenPost={handleOpenPost} />;
       default:
         return null;
     }
@@ -355,7 +355,7 @@ export default function App() {
         <SafeAreaView style={styles.boot}>
           <StatusBar style="light" />
           <Text style={styles.bootTitle}>MAHALA</Text>
-          <Text style={styles.bootCopy}>Loading your local scene...</Text>
+          <Text style={styles.bootCopy}>Ucitavanje tvoje lokalne scene...</Text>
         </SafeAreaView>
       </SafeAreaProvider>
     );
@@ -401,7 +401,7 @@ export default function App() {
           isPremium={authState.isPremium}
           onClose={() => setCreatingPost(false)}
           onSubmit={handleCreatePost}
-          onGuestBlocked={() => openGuestGate("Guest users can post only anonymously.")}
+          onGuestBlocked={() => openGuestGate("Gost korisnici mogu objavljivati samo anonimno.")}
         />
 
         <PurchaseModal
@@ -410,7 +410,7 @@ export default function App() {
           onClose={() => setActivePurchase(null)}
           onConfirm={(type, amount) => {
             if (authState.isGuest) {
-              openGuestGate("Purchases are available only after you create a Mahala account.");
+              openGuestGate("Kupovine su dostupne tek nakon kreiranja Mahala racuna.");
               return;
             }
 

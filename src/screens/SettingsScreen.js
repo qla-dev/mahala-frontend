@@ -6,9 +6,9 @@ export default function SettingsScreen({ user, location, notificationsEnabled, o
   return (
     <View style={styles.content}>
       <View style={styles.card}>
-        <Text style={styles.sectionTitle}>Account</Text>
+        <Text style={styles.sectionTitle}>Racun</Text>
         <Pressable onPress={onOpenEditName} style={styles.row}>
-          <Text style={styles.rowLabel}>Name</Text>
+          <Text style={styles.rowLabel}>Ime</Text>
           <Text style={styles.rowValue}>{user.firstName} {user.lastName}</Text>
         </Pressable>
         <Pressable onPress={onOpenEditEmail} style={styles.row}>
@@ -16,25 +16,25 @@ export default function SettingsScreen({ user, location, notificationsEnabled, o
           <Text style={styles.rowValue}>{user.email}</Text>
         </Pressable>
         <Pressable onPress={onOpenChangePassword} style={styles.row}>
-          <Text style={styles.rowLabel}>Password</Text>
-          <Text style={styles.rowValue}>Change</Text>
+          <Text style={styles.rowLabel}>Lozinka</Text>
+          <Text style={styles.rowValue}>Promijeni</Text>
         </Pressable>
       </View>
 
       <View style={styles.card}>
-        <Text style={styles.sectionTitle}>Local</Text>
+        <Text style={styles.sectionTitle}>Lokalno</Text>
         <Pressable onPress={onOpenLocationPicker} style={styles.row}>
-          <Text style={styles.rowLabel}>Current Mahala</Text>
+          <Text style={styles.rowLabel}>Trenutna Mahala</Text>
           <Text style={styles.rowValue}>{location}</Text>
         </Pressable>
         <View style={styles.row}>
-          <Text style={styles.rowLabel}>Notifications</Text>
+          <Text style={styles.rowLabel}>Obavijesti</Text>
           <Switch value={notificationsEnabled} onValueChange={onToggleNotifications} thumbColor={colors.text} trackColor={{ false: "rgba(255,255,255,0.18)", true: colors.accent }} />
         </View>
       </View>
 
       <Pressable onPress={onLogout} style={styles.logout}>
-        <Text style={styles.logoutText}>Log out</Text>
+        <Text style={styles.logoutText}>Odjavi se</Text>
       </Pressable>
     </View>
   );

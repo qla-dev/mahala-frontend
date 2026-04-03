@@ -7,7 +7,7 @@ export default function NotificationsScreen({ items, onUpgrade }) {
     <ScrollView contentContainerStyle={styles.content}>
       <Pressable onPress={onUpgrade} style={styles.banner}>
         <Text style={styles.bannerTitle}>Mahala Plus</Text>
-        <Text style={styles.bannerCopy}>Unlock premium channels, boosts, and color rewards.</Text>
+        <Text style={styles.bannerCopy}>Otkljucaj premium kanale, boostove i nagrade bojama.</Text>
       </Pressable>
 
       {items.map((item) => (

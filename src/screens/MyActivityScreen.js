@@ -8,7 +8,7 @@ export default function MyActivityScreen({ title, posts, onOpenPost }) {
       <Text style={styles.title}>{title}</Text>
       {posts.length === 0 ? (
         <View style={styles.empty}>
-          <Text style={styles.emptyText}>Nothing here yet.</Text>
+          <Text style={styles.emptyText}>Jos nema nista ovdje.</Text>
         </View>
       ) : (
         posts.map((post) => (

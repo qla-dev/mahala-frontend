@@ -1,14 +1,17 @@
 import React from "react";
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { colors } from "../constants/theme";
 
 export default function LocationPickerModal({ visible, cities, currentLocation, onClose, onSelect }) {
+  const insets = useSafeAreaInsets();
+
   return (
     <Modal animationType="slide" transparent visible={visible} onRequestClose={onClose}>
       <View style={styles.wrap}>
-        <View style={styles.sheet}>
-          <Text style={styles.title}>Pick your Mahala</Text>
-          <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={[styles.sheet, { paddingBottom: Math.max(insets.bottom + 10, 20) }]}>
+          <Text style={styles.title}>Odaberi svoju Mahalu</Text>
+          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.listContent}>
             {cities.map((city) => {
               const active = city.name === currentLocation;
               return (
@@ -17,13 +20,13 @@ export default function LocationPickerModal({ visible, cities, currentLocation, 
                     <Text style={[styles.name, active && styles.nameActive]}>{city.name}</Text>
                     <Text style={styles.distance}>{city.distance}</Text>
                   </View>
-                  <Text style={[styles.badge, active && styles.badgeActive]}>{active ? "LIVE" : "LOCAL"}</Text>
+                  <Text style={[styles.badge, active && styles.badgeActive]}>{active ? "AKTIVNO" : "LOKALNO"}</Text>
                 </Pressable>
               );
             })}
           </ScrollView>
           <Pressable onPress={onClose} style={styles.close}>
-            <Text style={styles.closeText}>Close</Text>
+            <Text style={styles.closeText}>Zatvori</Text>
           </Pressable>
         </View>
       </View>
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   sheet: {
-    maxHeight: "78%",
+    maxHeight: "72%",
     borderTopLeftRadius: 28,
     borderTopRightRadius: 28,
     backgroundColor: colors.panel,
@@ -50,7 +53,10 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: 20,
     fontWeight: "900",
-    marginBottom: 16
+    marginBottom: 14
+  },
+  listContent: {
+    paddingBottom: 8
   },
   row: {
     flexDirection: "row",
@@ -90,7 +96,7 @@ const styles = StyleSheet.create({
   },
   close: {
     alignItems: "center",
-    paddingTop: 8
+    paddingTop: 14
   },
   closeText: {
     color: colors.muted,

@@ -1,13 +1,14 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { colors, shadows } from "../constants/theme";
 
 const ITEMS = [
-  { label: "Feed", value: "FEED" },
-  { label: "Search", value: "SEARCH" },
-  { label: "Map", value: "MAP" },
-  { label: "Alerts", value: "NOTIFICATIONS" },
-  { label: "Profile", value: "PROFILE" }
+  { label: "Feed", value: "FEED", icon: "home" },
+  { label: "Pretraga", value: "SEARCH", icon: "search" },
+  { label: "Mapa", value: "MAP", icon: "map" },
+  { label: "Alerti", value: "NOTIFICATIONS", icon: "notifications" },
+  { label: "Profil", value: "PROFILE", icon: "person" }
 ];
 
 export default function Navbar({ currentView, onChange }) {
@@ -17,6 +18,7 @@ export default function Navbar({ currentView, onChange }) {
         const active = item.value === currentView;
         return (
           <Pressable key={item.value} onPress={() => onChange(item.value)} style={[styles.item, active && styles.itemActive]}>
+            <Ionicons name={item.icon} size={20} color={active ? colors.text : colors.subdued} style={styles.icon} />
             <Text style={[styles.label, active && styles.labelActive]}>{item.label}</Text>
           </Pressable>
         );
@@ -44,7 +46,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 16,
-    paddingVertical: 12
+    paddingVertical: 10
+  },
+  icon: {
+    marginBottom: 4
   },
   itemActive: {
     backgroundColor: colors.accent

@@ -8,11 +8,11 @@ export default function EditNameScreen({ user, onSave }) {
 
   return (
     <View style={styles.content}>
-      <Text style={styles.title}>Edit name</Text>
-      <TextInput value={firstName} onChangeText={setFirstName} placeholder="First name" placeholderTextColor={colors.subdued} style={styles.input} />
-      <TextInput value={lastName} onChangeText={setLastName} placeholder="Last name" placeholderTextColor={colors.subdued} style={styles.input} />
+      <Text style={styles.title}>Uredi ime</Text>
+      <TextInput value={firstName} onChangeText={setFirstName} placeholder="Ime" placeholderTextColor={colors.subdued} style={styles.input} />
+      <TextInput value={lastName} onChangeText={setLastName} placeholder="Prezime" placeholderTextColor={colors.subdued} style={styles.input} />
       <Pressable onPress={() => onSave({ firstName, lastName })} style={styles.primary}>
-        <Text style={styles.primaryText}>Save name</Text>
+        <Text style={styles.primaryText}>Sacuvaj ime</Text>
       </Pressable>
     </View>
   );

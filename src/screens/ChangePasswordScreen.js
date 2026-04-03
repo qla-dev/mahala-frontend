@@ -9,12 +9,12 @@ export default function ChangePasswordScreen({ onSubmit }) {
 
   return (
     <View style={styles.content}>
-      <Text style={styles.title}>Change password</Text>
-      <TextInput secureTextEntry value={currentPassword} onChangeText={setCurrentPassword} placeholder="Current password" placeholderTextColor={colors.subdued} style={styles.input} />
-      <TextInput secureTextEntry value={nextPassword} onChangeText={setNextPassword} placeholder="New password" placeholderTextColor={colors.subdued} style={styles.input} />
-      <TextInput secureTextEntry value={confirmPassword} onChangeText={setConfirmPassword} placeholder="Confirm new password" placeholderTextColor={colors.subdued} style={styles.input} />
+      <Text style={styles.title}>Promijeni lozinku</Text>
+      <TextInput secureTextEntry value={currentPassword} onChangeText={setCurrentPassword} placeholder="Trenutna lozinka" placeholderTextColor={colors.subdued} style={styles.input} />
+      <TextInput secureTextEntry value={nextPassword} onChangeText={setNextPassword} placeholder="Nova lozinka" placeholderTextColor={colors.subdued} style={styles.input} />
+      <TextInput secureTextEntry value={confirmPassword} onChangeText={setConfirmPassword} placeholder="Potvrdi novu lozinku" placeholderTextColor={colors.subdued} style={styles.input} />
       <Pressable onPress={() => onSubmit({ currentPassword, nextPassword, confirmPassword })} style={styles.primary}>
-        <Text style={styles.primaryText}>Update password</Text>
+        <Text style={styles.primaryText}>Azuriraj lozinku</Text>
       </Pressable>
     </View>
   );

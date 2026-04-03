@@ -5,15 +5,15 @@ import { colors, shadows } from "../constants/theme";
 export default function SearchScreen({ channels, location, isPremium, onUpgrade, onSelectChannel }) {
   return (
     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
-      <TextInput placeholder={`Search inside ${location}`} placeholderTextColor={colors.subdued} style={styles.search} />
+      <TextInput placeholder={`Pretrazi u ${location}`} placeholderTextColor={colors.subdued} style={styles.search} />
 
       {!isPremium ? (
         <Pressable onPress={onUpgrade} style={styles.upgrade}>
-          <Text style={styles.upgradeText}>Unlock Mahala Plus</Text>
+          <Text style={styles.upgradeText}>Otkljucaj Mahala Plus</Text>
         </Pressable>
       ) : null}
 
-      <Text style={styles.sectionLabel}>My channels</Text>
+      <Text style={styles.sectionLabel}>Moji kanali</Text>
       {channels.map((channel) => (
         <Pressable key={channel.id} onPress={() => onSelectChannel(channel)} style={styles.channelCard}>
           <View style={[styles.channelBadge, { backgroundColor: channel.color }]} />

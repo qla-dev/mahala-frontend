@@ -16,16 +16,16 @@ export default function PostDetailScreen({ post, onVote, onReply }) {
         <Text style={styles.body}>{post.content}</Text>
         <View style={styles.voteRow}>
           <Pressable onPress={() => onVote(post.id, 1)} style={styles.voteButton}>
-            <Text style={styles.voteText}>Upvote</Text>
+            <Text style={styles.voteText}>Gore</Text>
           </Pressable>
           <Text style={styles.score}>{post.score}</Text>
           <Pressable onPress={() => onVote(post.id, -1)} style={styles.voteButton}>
-            <Text style={styles.voteText}>Downvote</Text>
+            <Text style={styles.voteText}>Dolje</Text>
           </Pressable>
         </View>
       </View>
 
-      <Text style={styles.sectionLabel}>Replies</Text>
+      <Text style={styles.sectionLabel}>Odgovori</Text>
       {(post.replies || []).map((item) => (
         <View key={item.id} style={styles.replyCard}>
           <Text style={styles.replyAuthor}>@{item.author}</Text>
@@ -34,9 +34,9 @@ export default function PostDetailScreen({ post, onVote, onReply }) {
         </View>
       ))}
 
-      <TextInput multiline placeholder="Drop a reply" placeholderTextColor={colors.subdued} value={reply} onChangeText={setReply} style={styles.input} />
+      <TextInput multiline placeholder="Napisi odgovor" placeholderTextColor={colors.subdued} value={reply} onChangeText={setReply} style={styles.input} />
       <Pressable onPress={() => { if (!reply.trim()) return; onReply(post.id, reply.trim()); setReply(""); }} style={styles.replyButton}>
-        <Text style={styles.replyButtonText}>Reply</Text>
+        <Text style={styles.replyButtonText}>Odgovori</Text>
       </Pressable>
     </ScrollView>
   );

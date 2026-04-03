@@ -14,17 +14,17 @@ export default function PurchaseModal({ visible, type, onClose, onConfirm, onUpg
     <Modal animationType="fade" transparent visible={visible} onRequestClose={onClose}>
       <View style={styles.wrap}>
         <View style={styles.card}>
-          <Text style={styles.title}>{type === "boosts" ? "Boost shop" : "Color shop"}</Text>
+          <Text style={styles.title}>{type === "boosts" ? "Boost trgovina" : "Trgovina bojama"}</Text>
           {options.map((amount) => (
             <Pressable key={amount} onPress={() => onConfirm(type, amount)} style={styles.option}>
-              <Text style={styles.optionText}>{amount} pack</Text>
+              <Text style={styles.optionText}>{amount} paket</Text>
             </Pressable>
           ))}
           <Pressable onPress={onUpgrade} style={[styles.option, styles.upgrade]}>
-            <Text style={styles.optionText}>Unlock Mahala Plus</Text>
+            <Text style={styles.optionText}>Otkljucaj Mahala Plus</Text>
           </Pressable>
           <Pressable onPress={onClose} style={styles.close}>
-            <Text style={styles.closeText}>Close</Text>
+            <Text style={styles.closeText}>Zatvori</Text>
           </Pressable>
         </View>
       </View>

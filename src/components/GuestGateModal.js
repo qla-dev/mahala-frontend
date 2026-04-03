@@ -7,13 +7,13 @@ export default function GuestGateModal({ visible, message, onClose, onAction }) 
     <Modal animationType="fade" transparent visible={visible} onRequestClose={onClose}>
       <View style={styles.wrap}>
         <View style={styles.card}>
-          <Text style={styles.kicker}>Members only</Text>
+          <Text style={styles.kicker}>Samo za clanove</Text>
           <Text style={styles.message}>{message}</Text>
           <Pressable onPress={() => { onClose(); onAction(); }} style={styles.primary}>
-            <Text style={styles.primaryText}>Go to auth</Text>
+            <Text style={styles.primaryText}>Idi na prijavu</Text>
           </Pressable>
           <Pressable onPress={onClose} style={styles.secondary}>
-            <Text style={styles.secondaryText}>Maybe later</Text>
+            <Text style={styles.secondaryText}>Mozda kasnije</Text>
           </Pressable>
         </View>
       </View>

@@ -7,10 +7,10 @@ export default function EditEmailScreen({ user, onSave }) {
 
   return (
     <View style={styles.content}>
-      <Text style={styles.title}>Edit email</Text>
-      <TextInput value={email} onChangeText={setEmail} placeholder="Email address" autoCapitalize="none" placeholderTextColor={colors.subdued} style={styles.input} />
+      <Text style={styles.title}>Uredi email</Text>
+      <TextInput value={email} onChangeText={setEmail} placeholder="Email adresa" autoCapitalize="none" placeholderTextColor={colors.subdued} style={styles.input} />
       <Pressable onPress={() => onSave({ email })} style={styles.primary}>
-        <Text style={styles.primaryText}>Save email</Text>
+        <Text style={styles.primaryText}>Sacuvaj email</Text>
       </Pressable>
     </View>
   );

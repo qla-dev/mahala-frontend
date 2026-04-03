@@ -22,7 +22,7 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
           <Pressable onLongPress={() => setPreviewOpen(true)} delayLongPress={180} style={styles.imageWrap}>
             <Image source={{ uri: post.imageUri }} style={styles.image} />
             <View style={styles.imageMask}>
-              <Text style={styles.imageMaskText}>Hold to preview</Text>
+              <Text style={styles.imageMaskText}>Drzi za pregled</Text>
             </View>
           </Pressable>
         ) : null}
@@ -31,7 +31,7 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
 
         <View style={styles.footer}>
           <View style={styles.pill}>
-            <Text style={styles.pillText}>{post.commentCount} replies</Text>
+            <Text style={styles.pillText}>{post.commentCount} odgovora</Text>
           </View>
 
           <Pressable
@@ -59,15 +59,15 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
       <Modal animationType="fade" transparent visible={menuOpen} onRequestClose={() => setMenuOpen(false)}>
         <View style={styles.modalWrap}>
           <View style={styles.menuCard}>
-            <Text style={styles.menuTitle}>What feels wrong?</Text>
+            <Text style={styles.menuTitle}>Sta nije uredu?</Text>
             <Pressable onPress={() => { setMenuOpen(false); onReport(post.id); }} style={[styles.menuButton, styles.menuDanger]}>
-              <Text style={styles.menuButtonText}>Report abuse</Text>
+              <Text style={styles.menuButtonText}>Prijavi zloupotrebu</Text>
             </Pressable>
             <Pressable onPress={() => { setMenuOpen(false); onHide(post.id); }} style={styles.menuButton}>
-              <Text style={styles.menuButtonText}>Hide this post</Text>
+              <Text style={styles.menuButtonText}>Sakrij ovu objavu</Text>
             </Pressable>
             <Pressable onPress={() => setMenuOpen(false)} style={styles.menuGhost}>
-              <Text style={styles.menuGhostText}>Close</Text>
+              <Text style={styles.menuGhostText}>Zatvori</Text>
             </Pressable>
           </View>
         </View>

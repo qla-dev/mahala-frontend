@@ -6,10 +6,10 @@ export const CITIES = [
 ];
 
 export const CHANNELS = [
-  { id: "ch1", name: "glavna", slug: "glavna", description: "Main local current for everything around you", color: "#7c3aed", premium: false },
-  { id: "ch2", name: "desavase", slug: "desavase", description: "Live happenings in your block", color: "#4f46e5", premium: false },
-  { id: "ch3", name: "ljubimci", slug: "ljubimci", description: "Pets, parks, walks, and neighborhood furballs", color: "#059669", premium: false },
-  { id: "ch4", name: "politika", slug: "politika", description: "Hot takes, local pressure, city talk", color: "#dc2626", premium: true }
+  { id: "ch1", name: "glavna", slug: "glavna", description: "Glavni lokalni tok za sve oko tebe", color: "#7c3aed", premium: false },
+  { id: "ch2", name: "desavase", slug: "desavase", description: "Desavanja uzivo u tvom kraju", color: "#4f46e5", premium: false },
+  { id: "ch3", name: "ljubimci", slug: "ljubimci", description: "Ljubimci, parkovi, setnje i komsijske sapice", color: "#059669", premium: false },
+  { id: "ch4", name: "politika", slug: "politika", description: "Vruce teme, lokalni pritisak i gradske price", color: "#dc2626", premium: true }
 ];
 
 export const INITIAL_USER = {
@@ -30,7 +30,7 @@ export const INITIAL_POSTS = [
     id: "1",
     author: "glavna",
     channel: "glavna",
-    content: "Anyone up for late coffee near Bascarsija tonight?",
+    content: "Ima li ko za kasnu kafu kod Bascarsije veceras?",
     location: "Sarajevo",
     timeAgo: "2m",
     score: 12,
@@ -42,15 +42,15 @@ export const INITIAL_POSTS = [
     myVote: 0,
     masked: { bearingDeg: 18, ringKm: 1 },
     replies: [
-      { id: "r1", author: "ghost", content: "I can be there in ten.", timeAgo: "1m", votes: 3, isAnonymous: true },
-      { id: "r2", author: "local", content: "Behind Sebilj is packed right now.", timeAgo: "30s", votes: 1, isAnonymous: true }
+      { id: "r1", author: "ghost", content: "Mogu biti tamo za deset minuta.", timeAgo: "1m", votes: 3, isAnonymous: true },
+      { id: "r2", author: "local", content: "Iza Sebilja je trenutno bas puno ljudi.", timeAgo: "30s", votes: 1, isAnonymous: true }
     ]
   },
   {
     id: "2",
     author: "ljubimci",
     channel: "ljubimci",
-    content: "Found a very friendly golden retriever near the tram stop.",
+    content: "Nadjen bas prijateljski zlatni retriver blizu tramvajske stanice.",
     location: "Grbavica",
     timeAgo: "11m",
     score: 89,
@@ -67,7 +67,7 @@ export const INITIAL_POSTS = [
     id: "3",
     author: "desavase",
     channel: "desavase",
-    content: "Police and ambulance just arrived near the old cinema. Anybody know what happened?",
+    content: "Policija i hitna su upravo stigli kod starog kina. Zna li iko sta se desilo?",
     location: "Sebilj",
     timeAgo: "24m",
     score: 37,
@@ -83,7 +83,7 @@ export const INITIAL_POSTS = [
 ];
 
 export const NOTIFICATIONS = [
-  { id: "n1", title: "Reply landed", body: "Someone answered your Mahala post.", accent: "#8b5cf6" },
-  { id: "n2", title: "Boost ready", body: "You still have 3 boost credits available.", accent: "#10b981" },
-  { id: "n3", title: "Mahala Plus", body: "Unlock premium channels and image posting.", accent: "#ef4444" }
+  { id: "n1", title: "Stigao odgovor", body: "Neko je odgovorio na tvoju Mahala objavu.", accent: "#8b5cf6" },
+  { id: "n2", title: "Boost spreman", body: "Jos uvijek imas 3 boost kredita na raspolaganju.", accent: "#10b981" },
+  { id: "n3", title: "Mahala Plus", body: "Otkljucaj premium kanale i objave sa slikama.", accent: "#ef4444" }
 ];
