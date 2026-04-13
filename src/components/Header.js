@@ -1,6 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
 import { colors } from "../constants/theme";
 
 const TITLES = {
@@ -21,7 +22,7 @@ const TITLES = {
   MY_VOTES: "Moji glasovi"
 };
 
-export default function Header({ view, title, channelName, isPremium, onBack, onOpenSettings, onOpenLocationPicker, onOpenAddZone }) {
+export default function Header({ view, title, channelName, isPremium, onBack, onOpenSettings, onOpenLocationPicker, onOpenAddZone, onUpgrade }) {
   const canGoBack = ["CHANNEL_DETAIL", "POST_DETAIL", "PREMIUM_HUB", "SETTINGS", "CHANGE_PASSWORD", "EDIT_NAME", "EDIT_EMAIL", "MY_POSTS", "MY_REPLIES", "MY_VOTES"].includes(view);
   const label = view === "FEED" ? title : view === "CHANNEL_DETAIL" ? `@${channelName || "channel"}` : TITLES[view] || "Mahala";
 
@@ -30,26 +31,46 @@ export default function Header({ view, title, channelName, isPremium, onBack, on
       <View style={styles.side}>
         {canGoBack ? (
           <Pressable onPress={onBack} style={styles.iconButton}>
+            <GlassLayer />
             <Ionicons name="chevron-back" size={22} color={colors.text} />
           </Pressable>
         ) : (
-          <Pressable onPress={onOpenSettings} style={styles.iconButton}>
-            <Ionicons name="settings-sharp" size={18} color={colors.text} />
-          </Pressable>
+          <View style={styles.leftActions}>
+            <Pressable onPress={onOpenSettings} style={styles.iconButton}>
+              <GlassLayer />
+              <Ionicons name="settings-sharp" size={18} color={colors.text} />
+            </Pressable>
+            <Pressable onPress={onUpgrade} style={styles.plusButton}>
+              <GlassLayer light />
+              <Ionicons name="sparkles" size={13} color={colors.whiteButtonText} />
+              <Text style={styles.plusText}>PLUS</Text>
+            </Pressable>
+          </View>
         )}
       </View>
 
       <Pressable disabled={view !== "FEED"} onPress={onOpenLocationPicker} style={styles.center}>
+        <GlassLayer />
         <Text style={styles.title}>{label}</Text>
         {isPremium ? <Text style={styles.premium}>PLUS</Text> : null}
       </Pressable>
 
       <View style={[styles.side, styles.sideRight]}>
-        <Pressable onPress={onOpenAddZone} style={styles.addButton}>
-          <Text style={styles.addText}>+</Text>
+        <Pressable onPress={onOpenAddZone} style={styles.addZoneButton}>
+          <GlassLayer accent />
+          <Ionicons name="add" size={22} color={colors.text} />
         </Pressable>
       </View>
     </View>
+  );
+}
+
+function GlassLayer({ light = false, accent = false }) {
+  return (
+    <>
+      <BlurView pointerEvents="none" intensity={light ? 34 : 24} tint={light ? "light" : "dark"} style={StyleSheet.absoluteFill} />
+      <View pointerEvents="none" style={[styles.glassOverlay, light && styles.glassOverlayLight, accent && styles.glassOverlayAccent]} />
+    </>
   );
 }
 
@@ -65,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background
   },
   side: {
-    width: 52
+    width: 104
   },
   sideRight: {
     alignItems: "flex-end"
@@ -73,7 +94,19 @@ const styles = StyleSheet.create({
   center: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8
+    gap: 8,
+    paddingHorizontal: 14,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.07)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.16)",
+    overflow: "hidden",
+    shadowColor: "#ffffff",
+    shadowOpacity: 0.09,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 5
   },
   title: {
     color: colors.text,
@@ -92,20 +125,69 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.panel
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.18)",
+    overflow: "hidden",
+    shadowColor: "#ffffff",
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 5
   },
-  addButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
+  leftActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8
+  },
+  plusButton: {
+    height: 40,
+    paddingHorizontal: 13,
+    borderRadius: 20,
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.accent
+    gap: 5,
+    backgroundColor: "rgba(255,255,255,0.86)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.72)",
+    overflow: "hidden",
+    shadowColor: "#ffffff",
+    shadowOpacity: 0.18,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 7 },
+    elevation: 6
   },
-  addText: {
-    color: colors.text,
-    fontSize: 22,
+  plusText: {
+    color: colors.whiteButtonText,
+    fontSize: 10,
     fontWeight: "900",
-    marginTop: -2
+    letterSpacing: 0.8
+  },
+  addZoneButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(139,92,246,0.82)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.24)",
+    overflow: "hidden",
+    shadowColor: colors.accent,
+    shadowOpacity: 0.4,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 7 },
+    elevation: 7
+  },
+  glassOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(255,255,255,0.08)"
+  },
+  glassOverlayLight: {
+    backgroundColor: "rgba(255,255,255,0.32)"
+  },
+  glassOverlayAccent: {
+    backgroundColor: "rgba(139,92,246,0.35)"
   }
 });

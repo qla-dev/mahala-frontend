@@ -24,9 +24,6 @@ export default function FeedScreen({ posts, currentLocation, votedPosts, onVote,
     <View style={styles.wrap}>
       <ScrollView refreshControl={refreshControl} showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
         <View style={styles.topRow}>
-          <Pressable onPress={onUpgrade} style={styles.plusButton}>
-            <Text style={styles.plusButtonText}>PLUS</Text>
-          </Pressable>
           <View style={styles.tabs}>
             {TABS.map((item) => (
               <Pressable key={item} onPress={() => setTab(item)} style={[styles.tab, tab === item && styles.tabActive]}>
@@ -58,35 +55,26 @@ const styles = StyleSheet.create({
     paddingBottom: 140
   },
   topRow: {
-    gap: 14,
     marginBottom: 14
-  },
-  plusButton: {
-    alignSelf: "flex-start",
-    backgroundColor: colors.text,
-    paddingHorizontal: 16,
-    paddingVertical: 9,
-    borderRadius: 999
-  },
-  plusButtonText: {
-    color: colors.whiteButtonText,
-    fontSize: 11,
-    fontWeight: "900",
-    letterSpacing: 1.2
   },
   tabs: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8
+    gap: 8,
+    alignSelf: "flex-start"
   },
   tab: {
-    paddingHorizontal: 14,
-    paddingVertical: 10,
+    height: 40,
+    paddingHorizontal: 15,
     borderRadius: 999,
-    backgroundColor: colors.panel
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+    alignItems: "center",
+    justifyContent: "center"
   },
   tabActive: {
-    backgroundColor: colors.accent
+    backgroundColor: "rgba(139,92,246,0.72)",
+    borderColor: "rgba(255,255,255,0.24)"
   },
   tabText: {
     color: colors.muted,
@@ -98,7 +86,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    bottom: 72,
+    bottom: 26,
     alignSelf: "center",
     width: 68,
     height: 68,

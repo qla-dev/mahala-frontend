@@ -2,20 +2,35 @@ import React from "react";
 import { Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import { colors } from "../constants/theme";
 
-export default function SettingsScreen({ user, location, notificationsEnabled, onToggleNotifications, onOpenLocationPicker, onOpenEditName, onOpenEditEmail, onOpenChangePassword, onLogout }) {
+export default function SettingsScreen({
+  user,
+  location,
+  notificationsEnabled,
+  onToggleNotifications,
+  onOpenLocationPicker,
+  onOpenEditName,
+  onOpenEditEmail,
+  onOpenChangePassword,
+  onLogout,
+}) {
   return (
     <View style={styles.content}>
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Racun</Text>
         <Pressable onPress={onOpenEditName} style={styles.row}>
           <Text style={styles.rowLabel}>Ime</Text>
-          <Text style={styles.rowValue}>{user.firstName} {user.lastName}</Text>
+          <Text style={styles.rowValue}>
+            {user.firstName} {user.lastName}
+          </Text>
         </Pressable>
         <Pressable onPress={onOpenEditEmail} style={styles.row}>
           <Text style={styles.rowLabel}>Email</Text>
           <Text style={styles.rowValue}>{user.email}</Text>
         </Pressable>
-        <Pressable onPress={onOpenChangePassword} style={styles.row}>
+        <Pressable
+          onPress={onOpenChangePassword}
+          style={[styles.row, styles.rowLast]}
+        >
           <Text style={styles.rowLabel}>Lozinka</Text>
           <Text style={styles.rowValue}>Promijeni</Text>
         </Pressable>
@@ -27,9 +42,18 @@ export default function SettingsScreen({ user, location, notificationsEnabled, o
           <Text style={styles.rowLabel}>Trenutna Mahala</Text>
           <Text style={styles.rowValue}>{location}</Text>
         </Pressable>
-        <View style={styles.row}>
+        <View style={[styles.row, styles.rowLast]}>
           <Text style={styles.rowLabel}>Obavijesti</Text>
-          <Switch value={notificationsEnabled} onValueChange={onToggleNotifications} thumbColor={colors.text} trackColor={{ false: "rgba(255,255,255,0.18)", true: colors.accent }} />
+          <Switch
+            style={styles.switch}
+            value={notificationsEnabled}
+            onValueChange={onToggleNotifications}
+            thumbColor={colors.text}
+            trackColor={{
+              false: "rgba(255,255,255,0.18)",
+              true: colors.accent,
+            }}
+          />
         </View>
       </View>
 
@@ -44,12 +68,14 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 16,
-    gap: 14
+    gap: 14,
   },
   card: {
     borderRadius: 22,
-    padding: 18,
-    backgroundColor: colors.panel
+    paddingHorizontal: 18,
+    paddingTop: 18,
+    paddingBottom: 2,
+    backgroundColor: colors.panel,
   },
   sectionTitle: {
     color: colors.muted,
@@ -57,7 +83,7 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     letterSpacing: 1.2,
     textTransform: "uppercase",
-    marginBottom: 10
+    marginBottom: 10,
   },
   row: {
     minHeight: 52,
@@ -65,27 +91,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)"
+    borderBottomColor: "rgba(255,255,255,0.05)",
+  },
+  rowLast: {
+    minHeight: 46,
+    borderBottomWidth: 0,
+  },
+  switch: {
+    transform: [{ translateY: 7 }],
   },
   rowLabel: {
     color: colors.text,
     fontSize: 14,
-    fontWeight: "700"
+    fontWeight: "700",
   },
   rowValue: {
     color: colors.muted,
     fontSize: 13,
-    fontWeight: "700"
+    fontWeight: "700",
   },
   logout: {
     marginTop: 6,
     borderRadius: 20,
     paddingVertical: 18,
     alignItems: "center",
-    backgroundColor: "rgba(239,68,68,0.14)"
+    backgroundColor: "rgba(239,68,68,0.14)",
   },
   logoutText: {
     color: colors.danger,
-    fontWeight: "900"
-  }
+    fontWeight: "900",
+  },
 });

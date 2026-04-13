@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    bottom: 72,
+    bottom: 26,
     alignSelf: "center",
     width: 68,
     height: 68,

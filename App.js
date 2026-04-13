@@ -55,6 +55,7 @@ export default function App() {
   const [currentView, setCurrentView] = useState(VIEW.AUTH);
   const [selectedChannel, setSelectedChannel] = useState(null);
   const [selectedPostId, setSelectedPostId] = useState(null);
+  const [settingsReturnView, setSettingsReturnView] = useState(VIEW.PROFILE);
   const [location, setLocation] = useState(CITIES[0].name);
   const [furka, setFurka] = useState(420);
   const [posts, setPosts] = useState(INITIAL_POSTS);
@@ -144,7 +145,12 @@ export default function App() {
       return;
     }
 
-    if ([VIEW.PREMIUM_HUB, VIEW.SETTINGS, VIEW.MY_POSTS, VIEW.MY_REPLIES, VIEW.MY_VOTES].includes(currentView)) {
+    if (currentView === VIEW.SETTINGS) {
+      setCurrentView(settingsReturnView || VIEW.PROFILE);
+      return;
+    }
+
+    if ([VIEW.PREMIUM_HUB, VIEW.MY_POSTS, VIEW.MY_REPLIES, VIEW.MY_VOTES].includes(currentView)) {
       setCurrentView(VIEW.PROFILE);
       return;
     }
@@ -296,7 +302,10 @@ export default function App() {
               }
               setCurrentView(view);
             }}
-            onOpenSettings={() => setCurrentView(VIEW.SETTINGS)}
+            onOpenSettings={() => {
+              setSettingsReturnView(currentView);
+              setCurrentView(VIEW.SETTINGS);
+            }}
             onLogout={handleLogout}
           />
         );
@@ -384,9 +393,13 @@ export default function App() {
           channelName={selectedChannel?.name}
           isPremium={authState.isPremium}
           onBack={handleGoBack}
-          onOpenSettings={() => setCurrentView(VIEW.SETTINGS)}
+          onOpenSettings={() => {
+            setSettingsReturnView(currentView);
+            setCurrentView(VIEW.SETTINGS);
+          }}
           onOpenLocationPicker={() => setLocationPickerOpen(true)}
           onOpenAddZone={() => setZoneModalOpen(true)}
+          onUpgrade={() => setCurrentView(VIEW.PREMIUM_HUB)}
         />
 
         <View style={styles.content}>{renderScreen()}</View>
