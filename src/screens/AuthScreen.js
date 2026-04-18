@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Easing, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Circle, Path } from "react-native-svg";
@@ -10,28 +9,26 @@ const Stack = createNativeStackNavigator();
 
 export default function AuthScreen({ onSubmit, onGuest }) {
   return (
-    <NavigationContainer independent>
-      <Stack.Navigator
-        initialRouteName="AuthLanding"
-        screenOptions={{
-          headerShown: false,
-          animation: "slide_from_right",
-          animationDuration: 260,
-          gestureEnabled: true,
-          contentStyle: { backgroundColor: colors.background }
-        }}
-      >
-        <Stack.Screen name="AuthLanding">
-          {(props) => <AuthLandingScreen {...props} onGuest={onGuest} />}
-        </Stack.Screen>
-        <Stack.Screen name="Login">
-          {(props) => <AuthFormScreen {...props} mode="signin" onSubmit={onSubmit} />}
-        </Stack.Screen>
-        <Stack.Screen name="Register">
-          {(props) => <AuthFormScreen {...props} mode="signup" onSubmit={onSubmit} />}
-        </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      initialRouteName="AuthLanding"
+      screenOptions={{
+        headerShown: false,
+        animation: "slide_from_right",
+        animationDuration: 260,
+        gestureEnabled: true,
+        contentStyle: { backgroundColor: colors.background }
+      }}
+    >
+      <Stack.Screen name="AuthLanding">
+        {(props) => <AuthLandingScreen {...props} onGuest={onGuest} />}
+      </Stack.Screen>
+      <Stack.Screen name="Login">
+        {(props) => <AuthFormScreen {...props} mode="signin" onSubmit={onSubmit} />}
+      </Stack.Screen>
+      <Stack.Screen name="Register">
+        {(props) => <AuthFormScreen {...props} mode="signup" onSubmit={onSubmit} />}
+      </Stack.Screen>
+    </Stack.Navigator>
   );
 }
 
