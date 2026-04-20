@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Image, Modal, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CHANNELS } from "../constants/mockData";
 import { colors, postColors } from "../constants/theme";
@@ -115,6 +116,7 @@ export default function CreatePostModal({ visible, defaultChannel, currentUser, 
           <View style={styles.actionRow}>
             <Pressable onPress={pickImage} style={styles.actionButton}>
               <Text style={styles.actionButtonText}>{imageUri ? "Promijeni sliku" : "Dodaj sliku"}</Text>
+              <Ionicons name="camera" size={18} color={colors.text} />
             </Pressable>
 
             <View style={styles.switchWrap}>
@@ -278,19 +280,25 @@ const styles = StyleSheet.create({
   actionRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    gap: 12
+    gap: 10
   },
   actionButton: {
     flex: 1,
+    minHeight: 58,
     backgroundColor: "rgba(255,255,255,0.16)",
-    paddingVertical: 16,
+    paddingHorizontal: 14,
+    paddingVertical: 14,
     borderRadius: 18,
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 8
   },
   actionButtonText: {
     color: colors.text,
     fontSize: 13,
-    fontWeight: "900"
+    fontWeight: "900",
+    textAlign: "center"
   },
   switchWrap: {
     flex: 1,
@@ -298,8 +306,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "rgba(255,255,255,0.16)",
-    paddingHorizontal: 14,
-    minHeight: 56,
+    paddingLeft: 14,
+    paddingRight: 8,
+    minHeight: 58,
     borderRadius: 18
   },
   switchControl: {

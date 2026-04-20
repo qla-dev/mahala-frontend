@@ -1,19 +1,16 @@
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import { colors, shadows } from "../constants/theme";
+import { colors } from "../constants/theme";
 
-export default function SearchScreen({ channels, location, isPremium, onUpgrade, onSelectChannel }) {
+export default function SearchScreen({ channels, location, onSelectChannel }) {
   return (
     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
-      <TextInput placeholder={`Pretrazi u ${location}`} placeholderTextColor={colors.subdued} style={styles.search} />
+      <TextInput placeholder={`Pretrazi kanale u ${location}`} placeholderTextColor={colors.subdued} style={styles.search} />
 
-      {!isPremium ? (
-        <Pressable onPress={onUpgrade} style={styles.upgrade}>
-          <Text style={styles.upgradeText}>Otkljucaj Mahala Plus</Text>
-        </Pressable>
-      ) : null}
+      <Text style={styles.contextLabel}>Kanali</Text>
+      <Text style={styles.contextCopy}>Mahala u kojoj si trenutno: {location}</Text>
 
-      <Text style={styles.sectionLabel}>Moji kanali</Text>
+      <Text style={styles.sectionLabel}>Preporuceni kanali</Text>
       {channels.map((channel) => (
         <Pressable key={channel.id} onPress={() => onSelectChannel(channel)} style={styles.channelCard}>
           <View style={[styles.channelBadge, { backgroundColor: channel.color }]} />
@@ -47,18 +44,17 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     marginBottom: 18
   },
-  upgrade: {
-    borderRadius: 22,
-    paddingVertical: 18,
-    backgroundColor: colors.text,
-    alignItems: "center",
-    marginBottom: 20,
-    ...shadows.glow
+  contextLabel: {
+    color: colors.text,
+    fontSize: 26,
+    fontWeight: "900",
+    marginBottom: 4
   },
-  upgradeText: {
-    color: colors.whiteButtonText,
-    fontSize: 14,
-    fontWeight: "900"
+  contextCopy: {
+    color: colors.muted,
+    fontSize: 13,
+    fontWeight: "700",
+    marginBottom: 22
   },
   sectionLabel: {
     color: colors.muted,

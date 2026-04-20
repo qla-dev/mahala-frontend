@@ -4,13 +4,25 @@
     "slug": "mahala",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "android": {
-      "package": "com.mahala.app"
+      "package": "com.mahala.app",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#050505"
+      }
     },
     "ios": {
-      "bundleIdentifier": "com.mahala.app"
+      "bundleIdentifier": "com.mahala.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Mahala koristi lokaciju da pronadje zonu u kojoj se nalazis."
+      }
     },
     "plugins": [
       "expo-screen-orientation",

@@ -9,6 +9,9 @@ export default function PostDetailScreen({ post, onVote, onReply }) {
     return null;
   }
 
+  const upvotes = post.upvotes ?? Math.max(post.score, 0);
+  const downvotes = post.downvotes ?? Math.max(-post.score, 0);
+
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <View style={[styles.hero, { backgroundColor: post.color }]}>
@@ -16,11 +19,10 @@ export default function PostDetailScreen({ post, onVote, onReply }) {
         <Text style={styles.body}>{post.content}</Text>
         <View style={styles.voteRow}>
           <Pressable onPress={() => onVote(post.id, 1)} style={styles.voteButton}>
-            <Text style={styles.voteText}>Gore</Text>
+            <Text style={styles.voteText}>+ {upvotes}</Text>
           </Pressable>
-          <Text style={styles.score}>{post.score}</Text>
           <Pressable onPress={() => onVote(post.id, -1)} style={styles.voteButton}>
-            <Text style={styles.voteText}>Dolje</Text>
+            <Text style={styles.voteText}>- {downvotes}</Text>
           </Pressable>
         </View>
       </View>
@@ -80,11 +82,6 @@ const styles = StyleSheet.create({
   voteText: {
     color: colors.text,
     fontWeight: "800"
-  },
-  score: {
-    color: colors.text,
-    fontSize: 22,
-    fontWeight: "900"
   },
   sectionLabel: {
     color: colors.muted,

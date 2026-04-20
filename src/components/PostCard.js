@@ -1,9 +1,24 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import * as Haptics from "expo-haptics";
 import { colors, layout, shadows } from "../constants/theme";
 
-export default function PostCard({ post, votedValue, onOpen, onVote, onReport, onHide }) {
+export default function PostCard({
+  post,
+  votedValue,
+  onOpen,
+  onVote,
+  onReport,
+  onHide,
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
   const isImagePost = Boolean(post.isImage && post.imageUri);
@@ -13,12 +28,17 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
     setMenuOpen(true);
   };
 
+  const openImagePreview = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    setPreviewOpen(true);
+  };
+
   if (isImagePost) {
     return (
       <>
         <Pressable
           delayLongPress={420}
-          onLongPress={() => setPreviewOpen(true)}
+          onLongPress={openImagePreview}
           onPressOut={() => setPreviewOpen(false)}
           style={styles.imageCard}
         >
@@ -45,7 +65,9 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
 
             <View style={styles.footer}>
               <Pressable onPress={() => onOpen(post)} style={styles.pill}>
-                <Text style={styles.pillText}>{post.commentCount} odgovora</Text>
+                <Text style={styles.pillText}>
+                  {post.commentCount} odgovora
+                </Text>
               </Pressable>
 
               <Pressable onPress={openMenu} style={[styles.pill, styles.drot]}>
@@ -53,7 +75,12 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
               </Pressable>
             </View>
 
-            <VoteColumn post={post} votedValue={votedValue} onVote={onVote} image />
+            <VoteColumn
+              post={post}
+              votedValue={votedValue}
+              onVote={onVote}
+              image
+            />
           </ImageBackground>
         </Pressable>
 
@@ -65,13 +92,22 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
           onHide={onHide}
         />
 
-        <Modal animationType="fade" transparent visible={previewOpen} onRequestClose={() => setPreviewOpen(false)}>
+        <Modal
+          animationType="fade"
+          transparent
+          visible={previewOpen}
+          onRequestClose={() => setPreviewOpen(false)}
+        >
           <Pressable
             style={styles.previewWrap}
             onPressOut={() => setPreviewOpen(false)}
             onTouchEnd={() => setPreviewOpen(false)}
           >
-            <Image source={{ uri: post.imageUri }} style={styles.previewImage} resizeMode="contain" />
+            <Image
+              source={{ uri: post.imageUri }}
+              style={styles.previewImage}
+              resizeMode="contain"
+            />
           </Pressable>
         </Modal>
       </>
@@ -80,7 +116,10 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
 
   return (
     <>
-      <Pressable onPress={() => onOpen(post)} style={[styles.card, { backgroundColor: post.color }]}>
+      <Pressable
+        onPress={() => onOpen(post)}
+        style={[styles.card, { backgroundColor: post.color }]}
+      >
         <View style={styles.metaRow}>
           <Text style={styles.metaText}>@{post.author}</Text>
           <Text style={styles.metaText}>-</Text>
@@ -116,14 +155,49 @@ export default function PostCard({ post, votedValue, onOpen, onVote, onReport, o
 }
 
 function VoteColumn({ post, votedValue, onVote, image = false }) {
+  const upvotes = post.upvotes ?? Math.max(post.score, 0);
+  const downvotes = post.downvotes ?? Math.max(-post.score, 0);
+
   return (
     <View style={[styles.voteColumn, image && styles.imageVoteColumn]}>
-      <Pressable onPress={() => onVote(post.id, 1)} style={styles.voteButton}>
-        <Text style={[styles.voteArrow, votedValue === 1 && styles.voteArrowActive]}>+</Text>
+      <Pressable
+        onPress={() => onVote(post.id, 1)}
+        style={[styles.voteButton, votedValue === 1 && styles.voteButtonActive]}
+      >
+        <Text
+          style={[styles.voteArrow, votedValue === 1 && styles.voteArrowActive]}
+        >
+          +
+        </Text>
+        <Text
+          style={[styles.voteCount, votedValue === 1 && styles.voteArrowActive]}
+        >
+          {upvotes}
+        </Text>
       </Pressable>
-      <Text style={styles.voteScore}>{post.score}</Text>
-      <Pressable onPress={() => onVote(post.id, -1)} style={styles.voteButton}>
-        <Text style={[styles.voteArrow, votedValue === -1 && styles.voteArrowActive]}>-</Text>
+      <Pressable
+        onPress={() => onVote(post.id, -1)}
+        style={[
+          styles.voteButton,
+          votedValue === -1 && styles.voteButtonActive,
+        ]}
+      >
+        <Text
+          style={[
+            styles.voteArrow,
+            votedValue === -1 && styles.voteArrowActive,
+          ]}
+        >
+          -
+        </Text>
+        <Text
+          style={[
+            styles.voteCount,
+            votedValue === -1 && styles.voteArrowActive,
+          ]}
+        >
+          {downvotes}
+        </Text>
       </Pressable>
     </View>
   );
@@ -131,7 +205,12 @@ function VoteColumn({ post, votedValue, onVote, image = false }) {
 
 function ModerationModal({ visible, post, onClose, onReport, onHide }) {
   return (
-    <Modal animationType="fade" transparent visible={visible} onRequestClose={onClose}>
+    <Modal
+      animationType="fade"
+      transparent
+      visible={visible}
+      onRequestClose={onClose}
+    >
       <View style={styles.modalWrap}>
         <View style={styles.menuCard}>
           <Text style={styles.menuTitle}>Sta nije uredu?</Text>
@@ -169,7 +248,7 @@ const styles = StyleSheet.create({
     padding: 18,
     marginBottom: 12,
     overflow: "hidden",
-    ...shadows.card
+    ...shadows.card,
   },
   imageCard: {
     height: 176,
@@ -177,34 +256,34 @@ const styles = StyleSheet.create({
     borderRadius: layout.cardRadius,
     overflow: "hidden",
     backgroundColor: "#050505",
-    ...shadows.card
+    ...shadows.card,
   },
   imageBackground: {
     flex: 1,
     justifyContent: "space-between",
     padding: 18,
-    paddingRight: 66
+    paddingRight: 66,
   },
   imageBackgroundImage: {
-    borderRadius: layout.cardRadius
+    borderRadius: layout.cardRadius,
   },
   imageShade: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.38)"
+    backgroundColor: "rgba(0,0,0,0.38)",
   },
   metaRow: {
     flexDirection: "row",
     gap: 8,
     flexWrap: "wrap",
     marginBottom: 12,
-    zIndex: 3
+    zIndex: 3,
   },
   metaText: {
     color: "rgba(255,255,255,0.72)",
     fontSize: 10,
     fontWeight: "800",
     textTransform: "uppercase",
-    letterSpacing: 1
+    letterSpacing: 1,
   },
   imagePromptWrap: {
     position: "absolute",
@@ -213,7 +292,7 @@ const styles = StyleSheet.create({
     top: 68,
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 3
+    zIndex: 3,
   },
   imageMaskText: {
     color: colors.text,
@@ -227,7 +306,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.44)",
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.18)",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   content: {
     color: colors.text,
@@ -235,14 +314,14 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     fontWeight: "800",
     paddingRight: 54,
-    zIndex: 3
+    zIndex: 3,
   },
   footer: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
     marginTop: "auto",
-    zIndex: 3
+    zIndex: 3,
   },
   pill: {
     paddingHorizontal: 14,
@@ -250,67 +329,75 @@ const styles = StyleSheet.create({
     borderRadius: layout.pillRadius,
     backgroundColor: "rgba(0,0,0,0.18)",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)"
+    borderColor: "rgba(255,255,255,0.08)",
   },
   pillText: {
     color: colors.text,
     fontSize: 11,
-    fontWeight: "800"
+    fontWeight: "800",
   },
   drot: {
-    backgroundColor: "rgba(0,0,0,0.24)"
+    backgroundColor: "rgba(0,0,0,0.24)",
   },
   drotText: {
     color: colors.text,
     fontSize: 10,
     fontWeight: "900",
-    letterSpacing: 1
+    letterSpacing: 1,
   },
   voteColumn: {
     position: "absolute",
     right: 10,
-    top: 48,
-    width: 42,
-    borderRadius: 21,
+    top: "50%",
+    transform: [{ translateY: -40 }],
+    width: 56,
+    borderRadius: 28,
     paddingVertical: 8,
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.2)",
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.12)",
-    zIndex: 4
+    zIndex: 4,
   },
   imageVoteColumn: {
     right: 12,
-    top: 42,
-    width: 40,
-    borderRadius: 20,
-    backgroundColor: "rgba(0,0,0,0.38)"
+    top: "50%",
+    transform: [{ translateY: -40 }],
+    width: 56,
+    borderRadius: 28,
+    backgroundColor: "rgba(0,0,0,0.38)",
   },
   voteButton: {
-    width: 32,
-    height: 32,
+    width: 46,
+    minHeight: 50,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    borderRadius: 19,
+  },
+  voteButtonActive: {
+    backgroundColor: "rgba(255,255,255,0.16)",
   },
   voteArrow: {
     color: "rgba(255,255,255,0.75)",
     fontSize: 24,
-    fontWeight: "900"
+    lineHeight: 25,
+    fontWeight: "900",
   },
   voteArrowActive: {
-    color: colors.text
-  },
-  voteScore: {
     color: colors.text,
-    fontSize: 17,
-    fontWeight: "900"
+  },
+  voteCount: {
+    color: "rgba(255,255,255,0.75)",
+    fontSize: 11,
+    fontWeight: "900",
+    marginTop: -1,
   },
   modalWrap: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.82)",
     alignItems: "center",
     justifyContent: "center",
-    padding: 24
+    padding: 24,
   },
   menuCard: {
     width: "100%",
@@ -318,46 +405,46 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderWidth: 1,
     borderColor: colors.border,
-    padding: 20
+    padding: 20,
   },
   menuTitle: {
     color: colors.text,
     fontSize: 18,
     fontWeight: "900",
-    marginBottom: 16
+    marginBottom: 16,
   },
   menuButton: {
     paddingVertical: 16,
     borderRadius: 18,
     backgroundColor: colors.panelAlt,
     marginBottom: 10,
-    alignItems: "center"
+    alignItems: "center",
   },
   menuDanger: {
-    backgroundColor: "rgba(239,68,68,0.16)"
+    backgroundColor: "rgba(239,68,68,0.16)",
   },
   menuButtonText: {
     color: colors.text,
     fontSize: 14,
-    fontWeight: "800"
+    fontWeight: "800",
   },
   menuGhost: {
     alignItems: "center",
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   menuGhostText: {
     color: colors.muted,
     fontSize: 12,
-    fontWeight: "700"
+    fontWeight: "700",
   },
   previewWrap: {
     flex: 1,
     backgroundColor: "#000",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   previewImage: {
     width: "100%",
-    height: "100%"
-  }
+    height: "100%",
+  },
 });

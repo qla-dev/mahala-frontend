@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Animated, Easing, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
-import Svg, { Circle, Path } from "react-native-svg";
+import LottieView from "lottie-react-native";
 import { colors, shadows } from "../constants/theme";
+import mahalaJumpLogo from "../assets/mahalaJumpLogo.json";
 
 const Stack = createNativeStackNavigator();
 
@@ -187,42 +188,14 @@ function AuthHeader({ title, onBack }) {
 }
 
 function BouncingGhostLogo() {
-  const bounce = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    const loop = Animated.loop(
-      Animated.sequence([
-        Animated.timing(bounce, {
-          toValue: -10,
-          duration: 760,
-          easing: Easing.inOut(Easing.quad),
-          useNativeDriver: true
-        }),
-        Animated.timing(bounce, {
-          toValue: 0,
-          duration: 760,
-          easing: Easing.inOut(Easing.quad),
-          useNativeDriver: true
-        })
-      ])
-    );
-
-    loop.start();
-
-    return () => loop.stop();
-  }, [bounce]);
-
   return (
-    <Animated.View style={[styles.logoMark, { transform: [{ translateY: bounce }] }]}>
-      <Svg width={118} height={118} viewBox="0 0 128 128">
-        <Path
-          d="M28 104V48C28 25.9 44.1 10 64 10s36 15.9 36 38v56L86 91 74 104 64 92 54 104 42 91 28 104Z"
-          fill={colors.accent}
-        />
-        <Circle cx="54" cy="53" r="5.8" fill="#050505" />
-        <Circle cx="78" cy="53" r="5.8" fill="#050505" />
-      </Svg>
-    </Animated.View>
+    <LottieView
+      source={mahalaJumpLogo}
+      autoPlay
+      loop
+      style={styles.logoMark}
+      resizeMode="contain"
+    />
   );
 }
 
@@ -239,7 +212,9 @@ const styles = StyleSheet.create({
     paddingBottom: 70
   },
   logoMark: {
-    marginBottom: 18
+    width: 170,
+    height: 170,
+    marginBottom: 12
   },
   logoText: {
     color: colors.text,

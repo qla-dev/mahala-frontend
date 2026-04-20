@@ -184,18 +184,11 @@ export default function App() {
 
     const currentVote = votedPosts[postId] || 0;
     const nextVote = currentVote === value ? 0 : value;
-    const delta = nextVote - currentVote;
 
     setVotedPosts((prev) => ({ ...prev, [postId]: nextVote }));
     setPosts((prev) =>
       prev.map((post) =>
-        post.id === postId
-          ? {
-              ...post,
-              score: post.score + delta,
-              myVote: nextVote
-            }
-          : post
+        post.id === postId ? applyVoteChange(post, currentVote, nextVote) : post
       )
     );
   };
@@ -229,6 +222,8 @@ export default function App() {
       location,
       timeAgo: "now",
       score: 0,
+      upvotes: 0,
+      downvotes: 0,
       commentCount: 0,
       color: payload.color,
       isImage: payload.image != null,
@@ -243,6 +238,21 @@ export default function App() {
     setCreatingPost(false);
     setFurka((prev) => prev + 10);
     await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+  };
+
+  const applyVoteChange = (post, currentVote, nextVote) => {
+    const currentUpvotes = post.upvotes ?? Math.max(post.score, 0);
+    const currentDownvotes = post.downvotes ?? Math.max(-post.score, 0);
+    const upvotes = currentUpvotes + (nextVote === 1 ? 1 : 0) - (currentVote === 1 ? 1 : 0);
+    const downvotes = currentDownvotes + (nextVote === -1 ? 1 : 0) - (currentVote === -1 ? 1 : 0);
+
+    return {
+      ...post,
+      upvotes: Math.max(0, upvotes),
+      downvotes: Math.max(0, downvotes),
+      score: Math.max(0, upvotes) - Math.max(0, downvotes),
+      myVote: nextVote
+    };
   };
 
   const handleReply = (postId, content) => {

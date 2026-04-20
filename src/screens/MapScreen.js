@@ -1,24 +1,31 @@
 import React, { useMemo, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import MapView, { Circle, Marker, PROVIDER_DEFAULT } from "react-native-maps";
+import { StyleSheet, Text, View } from "react-native";
+import MapView, { Marker, Polygon, PROVIDER_DEFAULT } from "react-native-maps";
+import { BIH_POLYGONS } from "../constants/bihPolygons";
 import { colors } from "../constants/theme";
 import { projectMaskedCoordinate } from "../utils/map";
-
-const RADII = [1, 2.5, 5];
+import { pointInPolygon } from "../utils/polygon";
 
 export default function MapScreen({ posts, city, onOpenPost }) {
-  const [radiusKm, setRadiusKm] = useState(2.5);
-
+  const [labelsVisible, setLabelsVisible] = useState(true);
   const markers = useMemo(() => {
     if (!city) {
       return [];
     }
 
-    return posts.filter((post) => post.masked.ringKm <= radiusKm).map((post) => ({
+    return posts.map((post) => ({
       ...post,
       coordinate: projectMaskedCoordinate(city, post.masked.bearingDeg, post.masked.ringKm)
     }));
-  }, [city, posts, radiusKm]);
+  }, [city, posts]);
+
+  const activeZone = useMemo(() => {
+    if (!city) {
+      return null;
+    }
+
+    return BIH_POLYGONS.find((polygon) => pointInPolygon(city, polygon.coordinates, polygon.holes)) || null;
+  }, [city]);
 
   if (!city) {
     return null;
@@ -30,6 +37,9 @@ export default function MapScreen({ posts, city, onOpenPost }) {
         provider={PROVIDER_DEFAULT}
         style={StyleSheet.absoluteFill}
         customMapStyle={mapStyle}
+        onRegionChangeComplete={(region) => {
+          setLabelsVisible(region.latitudeDelta < 0.45);
+        }}
         initialRegion={{
           latitude: city.latitude,
           longitude: city.longitude,
@@ -37,7 +47,29 @@ export default function MapScreen({ posts, city, onOpenPost }) {
           longitudeDelta: 0.08
         }}
       >
-        <Circle center={{ latitude: city.latitude, longitude: city.longitude }} radius={radiusKm * 1000} strokeColor="rgba(255,255,255,0.55)" fillColor="rgba(139,92,246,0.09)" />
+        {BIH_POLYGONS.map((polygon) => {
+          const active = activeZone?.id === polygon.id;
+
+          return (
+            <Polygon
+              key={polygon.id}
+              coordinates={polygon.coordinates}
+              holes={polygon.holes}
+              strokeColor={active ? colors.accent : "rgba(255,255,255,0.9)"}
+              fillColor={active ? "rgba(139,92,246,0.42)" : "rgba(139,92,246,0.14)"}
+              strokeWidth={active ? 3 : 2}
+            />
+          );
+        })}
+        {labelsVisible
+          ? BIH_POLYGONS.map((polygon) => (
+              <Marker key={`${polygon.id}-label`} coordinate={polygon.center} anchor={{ x: 0.5, y: 0.5 }}>
+                <View style={[styles.zoneLabel, activeZone?.id === polygon.id && styles.zoneLabelActive]}>
+                  <Text style={[styles.zoneLabelText, activeZone?.id === polygon.id && styles.zoneLabelTextActive]}>{polygon.name}</Text>
+                </View>
+              </Marker>
+            ))
+          : null}
         {markers.map((post) => (
           <Marker key={post.id} coordinate={post.coordinate} onPress={() => onOpenPost(post)}>
             <View style={[styles.marker, { backgroundColor: post.color }]} />
@@ -47,23 +79,12 @@ export default function MapScreen({ posts, city, onOpenPost }) {
 
       <View style={styles.hudTop}>
         <View style={styles.hudCard}>
-          <Text style={styles.hudKicker}>Privacy mask</Text>
-          <Text style={styles.hudValue}>Border projection active</Text>
+          <Text style={styles.hudKicker}>Trenutna zona</Text>
+          <Text style={styles.hudValue}>{activeZone?.name || city.name}</Text>
         </View>
         <View style={styles.hudCard}>
-          <Text style={styles.hudKicker}>City center</Text>
+          <Text style={styles.hudKicker}>Mahala</Text>
           <Text style={styles.hudValue}>{city.name}</Text>
-        </View>
-      </View>
-
-      <View style={styles.radiusPanel}>
-        <Text style={styles.radiusTitle}>Change radius</Text>
-        <View style={styles.radiusRow}>
-          {RADII.map((value) => (
-            <Pressable key={value} onPress={() => setRadiusKm(value)} style={[styles.radiusButton, radiusKm === value && styles.radiusButtonActive]}>
-              <Text style={[styles.radiusText, radiusKm === value && styles.radiusTextActive]}>{value} km</Text>
-            </Pressable>
-          ))}
         </View>
       </View>
     </View>
@@ -103,44 +124,27 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "800"
   },
-  radiusPanel: {
-    position: "absolute",
-    bottom: 96,
-    left: 16,
-    right: 16,
-    padding: 18,
-    borderRadius: 24,
-    backgroundColor: "rgba(0,0,0,0.8)",
+  zoneLabel: {
+    maxWidth: 92,
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+    borderRadius: 8,
+    backgroundColor: "rgba(0,0,0,0.72)",
     borderWidth: 1,
-    borderColor: colors.border
+    borderColor: "rgba(255,255,255,0.28)"
   },
-  radiusTitle: {
+  zoneLabelActive: {
+    backgroundColor: colors.accent,
+    borderColor: colors.text
+  },
+  zoneLabelText: {
     color: colors.text,
-    fontSize: 14,
+    fontSize: 9,
     fontWeight: "900",
-    marginBottom: 14
+    textAlign: "center"
   },
-  radiusRow: {
-    flexDirection: "row",
-    gap: 10
-  },
-  radiusButton: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    borderRadius: 16,
-    backgroundColor: colors.panel
-  },
-  radiusButtonActive: {
-    backgroundColor: colors.text
-  },
-  radiusText: {
-    color: colors.text,
-    fontWeight: "800"
-  },
-  radiusTextActive: {
-    color: colors.whiteButtonText
+  zoneLabelTextActive: {
+    color: colors.text
   },
   marker: {
     width: 18,
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
 
 const mapStyle = [
   { elementType: "geometry", stylers: [{ color: "#0a0a0a" }] },
-  { elementType: "labels.text.fill", stylers: [{ color: "#606673" }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#707789" }] },
   { elementType: "labels.text.stroke", stylers: [{ color: "#0a0a0a" }] },
   { featureType: "road", elementType: "geometry", stylers: [{ color: "#16161c" }] },
   { featureType: "water", elementType: "geometry", stylers: [{ color: "#09090b" }] }

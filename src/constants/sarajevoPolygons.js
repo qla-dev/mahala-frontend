@@ -1,0 +1,182 @@
+export const SARAJEVO_POLYGONS = [
+  {
+    id: "43093233B29241521930866",
+    name: "Ilijas",
+    center: { latitude: 44.002878, longitude: 18.423544 },
+    coordinates: [
+      { latitude: 44.103194, longitude: 18.494387 },
+      { latitude: 44.082929, longitude: 18.433671 },
+      { latitude: 44.067157, longitude: 18.446632 },
+      { latitude: 44.044916, longitude: 18.427323 },
+      { latitude: 44.067917, longitude: 18.414891 },
+      { latitude: 44.061265, longitude: 18.385002 },
+      { latitude: 44.049859, longitude: 18.373892 },
+      { latitude: 44.004846, longitude: 18.381087 },
+      { latitude: 43.998514, longitude: 18.364158 },
+      { latitude: 44.007525, longitude: 18.339781 },
+      { latitude: 43.970621, longitude: 18.325561 },
+      { latitude: 43.971897, longitude: 18.224296 },
+      { latitude: 43.900393, longitude: 18.247529 },
+      { latitude: 43.888418, longitude: 18.26441 },
+      { latitude: 43.90931, longitude: 18.298122 },
+      { latitude: 43.928044, longitude: 18.304948 },
+      { latitude: 43.925469, longitude: 18.33236 },
+      { latitude: 43.945423, longitude: 18.33385 },
+      { latitude: 43.973305, longitude: 18.370796 },
+      { latitude: 43.957435, longitude: 18.373775 },
+      { latitude: 43.947354, longitude: 18.390758 },
+      { latitude: 43.952694, longitude: 18.439043 },
+      { latitude: 43.940586, longitude: 18.459459 },
+      { latitude: 43.942068, longitude: 18.488629 },
+      { latitude: 43.987899, longitude: 18.562534 },
+      { latitude: 44.010267, longitude: 18.568385 },
+      { latitude: 44.023746, longitude: 18.592871 },
+      { latitude: 44.054169, longitude: 18.610441 },
+      { latitude: 44.0719, longitude: 18.585246 },
+      { latitude: 44.058398, longitude: 18.56527 },
+      { latitude: 44.061804, longitude: 18.548003 },
+      { latitude: 44.082457, longitude: 18.535449 },
+      { latitude: 44.103194, longitude: 18.494387 }
+    ]
+  },
+  {
+    id: "43093233B88722992155367",
+    name: "Stari Grad",
+    center: { latitude: 43.897631, longitude: 18.462608 },
+    coordinates: [
+      { latitude: 43.940586, longitude: 18.459459 },
+      { latitude: 43.912815, longitude: 18.441911 },
+      { latitude: 43.886148, longitude: 18.451125 },
+      { latitude: 43.851306, longitude: 18.429768 },
+      { latitude: 43.83398, longitude: 18.442006 },
+      { latitude: 43.868427, longitude: 18.484816 },
+      { latitude: 43.893717, longitude: 18.479286 },
+      { latitude: 43.951116, longitude: 18.515642 },
+      { latitude: 43.940586, longitude: 18.459459 }
+    ]
+  },
+  {
+    id: "43093233B20708549274135",
+    name: "Hadzici",
+    center: { latitude: 43.75645, longitude: 18.151711 },
+    coordinates: [
+      { latitude: 43.736681, longitude: 18.262134 },
+      { latitude: 43.762797, longitude: 18.24655 },
+      { latitude: 43.830885, longitude: 18.235585 },
+      { latitude: 43.85179, longitude: 18.233297 },
+      { latitude: 43.840926, longitude: 18.189438 },
+      { latitude: 43.852221, longitude: 18.173131 },
+      { latitude: 43.828636, longitude: 18.138838 },
+      { latitude: 43.800677, longitude: 18.075532 },
+      { latitude: 43.809826, longitude: 18.050505 },
+      { latitude: 43.788443, longitude: 18.02237 },
+      { latitude: 43.793179, longitude: 18.002159 },
+      { latitude: 43.766686, longitude: 18.011705 },
+      { latitude: 43.7247, longitude: 18.066973 },
+      { latitude: 43.701833, longitude: 18.047146 },
+      { latitude: 43.679819, longitude: 18.068923 },
+      { latitude: 43.688986, longitude: 18.099259 },
+      { latitude: 43.681151, longitude: 18.121361 },
+      { latitude: 43.698073, longitude: 18.142055 },
+      { latitude: 43.676673, longitude: 18.165354 },
+      { latitude: 43.695923, longitude: 18.191345 },
+      { latitude: 43.695096, longitude: 18.231581 },
+      { latitude: 43.704471, longitude: 18.245882 },
+      { latitude: 43.731346, longitude: 18.248171 },
+      { latitude: 43.736681, longitude: 18.262134 }
+    ]
+  },
+  {
+    id: "43093233B76640285060416",
+    name: "Ilidza",
+    center: { latitude: 43.827375, longitude: 18.268381 },
+    coordinates: [
+      { latitude: 43.900393, longitude: 18.247529 },
+      { latitude: 43.902062, longitude: 18.173941 },
+      { latitude: 43.867459, longitude: 18.184884 },
+      { latitude: 43.852221, longitude: 18.173131 },
+      { latitude: 43.840926, longitude: 18.189438 },
+      { latitude: 43.849728, longitude: 18.236539 },
+      { latitude: 43.830885, longitude: 18.235585 },
+      { latitude: 43.808183, longitude: 18.259421 },
+      { latitude: 43.762797, longitude: 18.24655 },
+      { latitude: 43.736681, longitude: 18.262134 },
+      { latitude: 43.730519, longitude: 18.377076 },
+      { latitude: 43.764363, longitude: 18.361111 },
+      { latitude: 43.78551, longitude: 18.324376 },
+      { latitude: 43.814644, longitude: 18.350433 },
+      { latitude: 43.824694, longitude: 18.329976 },
+      { latitude: 43.839138, longitude: 18.34485 },
+      { latitude: 43.864715, longitude: 18.293936 },
+      { latitude: 43.865265, longitude: 18.263998 },
+      { latitude: 43.888495, longitude: 18.264379 },
+      { latitude: 43.900393, longitude: 18.247529 }
+    ]
+  },
+  {
+    id: "43093233B64707009731304",
+    name: "Novo Sarajevo",
+    center: { latitude: 43.848893, longitude: 18.395531 },
+    coordinates: [
+      { latitude: 43.843004, longitude: 18.41093 },
+      { latitude: 43.864303, longitude: 18.403391 },
+      { latitude: 43.86554, longitude: 18.382416 },
+      { latitude: 43.828613, longitude: 18.369989 },
+      { latitude: 43.843004, longitude: 18.41093 }
+    ]
+  },
+  {
+    id: "43093233B82310753062851",
+    name: "Centar",
+    center: { latitude: 43.888875, longitude: 18.42389 },
+    coordinates: [
+      { latitude: 43.942872, longitude: 18.453383 },
+      { latitude: 43.909801, longitude: 18.395228 },
+      { latitude: 43.882534, longitude: 18.403272 },
+      { latitude: 43.867417, longitude: 18.392952 },
+      { latitude: 43.859216, longitude: 18.408159 },
+      { latitude: 43.843004, longitude: 18.41093 },
+      { latitude: 43.842068, longitude: 18.428562 },
+      { latitude: 43.886148, longitude: 18.451125 },
+      { latitude: 43.912815, longitude: 18.441911 },
+      { latitude: 43.942872, longitude: 18.453383 }
+    ]
+  },
+  {
+    id: "43093233B94913651340481",
+    name: "Novi Grad",
+    center: { latitude: 43.858469, longitude: 18.314693 },
+    coordinates: [
+      { latitude: 43.888418, longitude: 18.26441 },
+      { latitude: 43.865265, longitude: 18.263998 },
+      { latitude: 43.864715, longitude: 18.293936 },
+      { latitude: 43.839138, longitude: 18.34485 },
+      { latitude: 43.824694, longitude: 18.329976 },
+      { latitude: 43.816026, longitude: 18.338557 },
+      { latitude: 43.828758, longitude: 18.370253 },
+      { latitude: 43.860427, longitude: 18.376307 },
+      { latitude: 43.908831, longitude: 18.300229 },
+      { latitude: 43.888418, longitude: 18.26441 }
+    ]
+  },
+  {
+    id: "43093233B27153812747449",
+    name: "Vogosca",
+    center: { latitude: 43.92684, longitude: 18.36731 },
+    coordinates: [
+      { latitude: 43.90931, longitude: 18.298122 },
+      { latitude: 43.860427, longitude: 18.376307 },
+      { latitude: 43.882534, longitude: 18.403272 },
+      { latitude: 43.913879, longitude: 18.398505 },
+      { latitude: 43.942872, longitude: 18.453383 },
+      { latitude: 43.952694, longitude: 18.439043 },
+      { latitude: 43.947354, longitude: 18.390758 },
+      { latitude: 43.957435, longitude: 18.373775 },
+      { latitude: 43.973305, longitude: 18.370796 },
+      { latitude: 43.945423, longitude: 18.33385 },
+      { latitude: 43.925469, longitude: 18.33236 },
+      { latitude: 43.928902, longitude: 18.306736 },
+      { latitude: 43.90931, longitude: 18.298122 }
+    ]
+  }
+];
