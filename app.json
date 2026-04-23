@@ -8,7 +8,7 @@
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "android": {
-      "package": "com.mahala.app",
+      "package": "mahala.qla.dev",
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION"
@@ -19,14 +19,21 @@
       }
     },
     "ios": {
-      "bundleIdentifier": "com.mahala.app",
+      "bundleIdentifier": "mahala.qla.dev",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Mahala koristi lokaciju da pronadje zonu u kojoj se nalazis."
+        "NSLocationWhenInUseUsageDescription": "Mahala koristi lokaciju da pronadje zonu u kojoj se nalazis.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "plugins": [
       "expo-screen-orientation",
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "68b6f62a-ca7e-4184-b955-74f109f1ecc8"
+      }
+    },
+    "owner": "qla-dev"
   }
 }
